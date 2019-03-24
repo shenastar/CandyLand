@@ -12,10 +12,10 @@ public class playerController : MonoBehaviour
 
     private bool facingRight = true;
 
-    private bool isGrounded;
+    public bool isGrounded, isPlayerDrop, isPlayerDead;
     public Transform groundCheck;
     public float checkRadius;
-    public LayerMask whatIsGround;
+    public LayerMask layerGround, layerDrop;
 
     private int extraJumps;
     public int extraJumpsValue;
@@ -32,7 +32,9 @@ public class playerController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround); 
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, layerGround);
+        isPlayerDrop = Physics2D.OverlapCircle(groundCheck.position, checkRadius, layerDrop);
+
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
