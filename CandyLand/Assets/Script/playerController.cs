@@ -6,15 +6,13 @@ public class playerController : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    public float checkRadius;
     private float moveInput;
-
-    private Rigidbody2D rb;
-
     private bool facingRight = true;
 
     public bool isGrounded, isPlayerDrop, isPlayerDead;
+    private Rigidbody2D rb;
     public Transform groundCheck;
-    public float checkRadius;
     public LayerMask layerGround, layerDrop;
 
     private int extraJumps;
@@ -30,7 +28,7 @@ public class playerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void FixedUpdate()
+    private void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, layerGround);
         isPlayerDrop = Physics2D.OverlapCircle(groundCheck.position, checkRadius, layerDrop);
@@ -43,14 +41,11 @@ public class playerController : MonoBehaviour
             Debug.Log("facing right = false");
             Flip();
         }
-        else if (facingRight == true && moveInput < 0) {
+        else if (facingRight == true && moveInput < 0)
+        {
             Debug.Log("facing left");
             Flip();
         }
-    }
-
-    private void Update()
-    {
         if (isGrounded == true) {
             extraJumps = extraJumpsValue;
             anim.SetBool("isJumping", false);
@@ -73,7 +68,7 @@ public class playerController : MonoBehaviour
         else {
             anim.SetBool("isRunning", true);
             anim.SetBool("isJumping", true);
-                }
+        }
     }
 
     void Flip() {
