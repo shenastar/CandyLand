@@ -38,12 +38,10 @@ public class playerController : MonoBehaviour
 
         if (facingRight == false && moveInput > 0)
         {
-            Debug.Log("facing right = false");
             Flip();
         }
         else if (facingRight == true && moveInput < 0)
         {
-            Debug.Log("facing left");
             Flip();
         }
         if (isGrounded == true) {
