@@ -10,9 +10,9 @@ public class playerController : MonoBehaviour
     private float moveInput;
     private bool facingRight = true;
 
-    public bool isGrounded, isPlayerDrop, isPlayerDead;
+    public bool isGrounded, isPlayerDrop, isPlayerDead, isTouchEnemy;
     private Rigidbody2D rb;
-    public Transform groundCheck;
+    public Transform groundCheck, enemyCheck;
     public LayerMask layerGround, layerDrop;
 
     private int extraJumps;
@@ -32,6 +32,7 @@ public class playerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, layerGround);
         isPlayerDrop = Physics2D.OverlapCircle(groundCheck.position, checkRadius, layerDrop);
+        isTouchEnemy = Physics2D.OverlapCircle(enemyCheck.position, checkRadius, layerDrop);
 
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
