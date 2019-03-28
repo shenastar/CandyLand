@@ -5,14 +5,20 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour
 {
     public GameMaster gm;
-    public GameObject startPoint;
+    private bool finish = false;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        finish = this.gameObject.name == "FinishState" ? true : false;
+        if (collision.tag == "Player" && !finish)
         {
             Debug.Log("save");
             gm.savePointState.transform.position = transform.position;
+        }
+        if(collision.tag == "Player" && finish)
+        {
+            Debug.Log("finish");
+            gm.stageClear();
         }
     }
 }

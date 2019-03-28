@@ -7,9 +7,8 @@ public class GameMaster : MonoBehaviour
 {
     public GameObject player, savePointState;
     public GameObject[] heartPoint;
-    public SavePoint sp;
     public bool isPlayerDead, isPlayerDrop, isTouchEnemy;
-    public int heart;
+    public int heart, level;
     private playerController controller;
     private string nameScene;
 
@@ -24,11 +23,11 @@ public class GameMaster : MonoBehaviour
         isPlayerDrop = controller.isPlayerDrop;
         isTouchEnemy = controller.isTouchEnemy;
         savePoint();
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.P))
         {
             Time.timeScale = 0;
         }
-        if (Input.GetKey(KeyCode.P)) 
+        if (Input.GetKey(KeyCode.R)) 
         {
             Time.timeScale = 1;
         }
@@ -58,5 +57,10 @@ public class GameMaster : MonoBehaviour
     private void healthDecrease(int indexHeart)
     {
         heartPoint[indexHeart].SetActive(false);
+    }
+
+    public void stageClear()
+    {
+        SceneManager.LoadSceneAsync(level+1);
     }
 }
